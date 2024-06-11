@@ -1,3 +1,21 @@
+<?php
+require '../config/database.php';
+ $checkid = isset($_GET['ID']) ? $_GET['ID'] : null;
+$result = mysqli_query($conn, "SELECT * FROM danhmuc where ID = $checkid");
+$row = mysqli_fetch_assoc($result);
+if(isset($_POST['TenDM'])){
+    $TenDM = $_POST['TenDM'];
+    $sql = "UPDATE danhmuc SET TenDM = '$TenDM' where ID = $checkid";
+    if($conn->query($sql) === true){
+        echo "<script>alert('Cập nhật thông tin danh mục thành công!');</script>";
+        echo "<script>window.location.href = 'index.php';</script>";
+    }else{
+        echo "thất bại" . $conn->connect_error ; 
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +48,7 @@
             <hr>
             <nav>
                 <div class="list-group">
-                    <a class="list-group-item list-group-item-action list-group-item-dark" href="">
+                    <a class="list-group-item list-group-item-action list-group-item-dark" href="index.php">
                         <i class="bi bi-clipboard mr-2" style="font-size: 20px;"></i>Quản lý danh mục
                     </a>
                     <a class="list-group-item list-group-item-action list-group-item-dark" href="">
@@ -40,33 +58,19 @@
             </nav>
         </section>
         <section class="col-10 bg-light">
-            <h2 class="mt-3">Thêm mới hàng hóa</h2>
-            <a class="btn btn-success mb-3" href="">Thêm mới</a>
-            <form class="d-flex flex-wrap">
+            <h2 class="mt-3">Cập nhật danh mục</h2>
+            <form class="d-flex flex-wrap" action="" method="post">
                 <div class="form-group flex-grow-1 col-4">
-                    <label for="formGroupExampleInput">Mã sản phẩm</label>
-                    <input type="text" class="form-control " id="formGroupExampleInput"
-                        placeholder="Example input placeholder">
-                </div>
-                <div class="form-group flex-grow-1 col-4">
-                    <label for="formGroupExampleInput2">Tên sản phẩm</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2"
-                        placeholder="Another input placeholder">
+                    <label for="formGroupExampleInput">Mã danh mục</label>
+                    <input type="text" disabled class="form-control "  id="formGroupExampleInput"
+                        placeholder="<?php echo $row['ID'] ?>">
                 </div>
                 <div class="form-group flex-grow-1 col-4">
-                    <label for="formGroupExampleInput">Đơn giá</label>
-                    <input type="text" class="form-control " id="formGroupExampleInput"
-                        placeholder="Example input placeholder">
+                    <label for="formGroupExampleInput2">Tên danh mục</label>
+                    <input type="text" class="form-control" name="TenDM" id="formGroupExampleInput2"
+                        value="<?php echo $row['TenDM'] ?>">
                 </div>
-                <div class="form-group flex-grow-1 col-12">
-                    <label for="formGroupExampleInput2">Tự them cột</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2"
-                        placeholder="Another input placeholder">
-                </div>
-                <div class="form-group flex-grow-1 col-12">
-                    <label for="formGroupExampleInput2">Mô tả</label>
-                    <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
-                </div>
+                <input type="submit" class="btn btn-success mb-3" value="Cập nhật">
             </form>
         </section>
     </article>

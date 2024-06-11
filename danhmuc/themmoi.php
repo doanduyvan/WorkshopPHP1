@@ -5,7 +5,8 @@ if(isset($_POST['tendm'])){
     $tendm = $_POST['tendm'];
     $sql = "INSERT INTO danhmuc(TenDM) values ('$tendm')";
     if($conn->query($sql) === true){
-        echo "Thêm thành công";
+        echo "<script>alert('Thêm danh mục thành công!');</script>";
+        echo "<script>window.location.href = 'index.php';</script>";
     }else{
         echo "thất bại" . $conn->connect_error ; 
     }

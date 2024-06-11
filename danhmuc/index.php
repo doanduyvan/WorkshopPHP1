@@ -59,7 +59,8 @@ $result = mysqli_query($conn, "SELECT * FROM danhmuc");
                     <td><?php echo $row['TenDM'];?></td>
                     <td>
                         <a class="btn btn-info" href="capnhat.php?ID=<?php echo $row['ID'] ?>">Sửa</a>
-                        <a class="btn btn-danger" href="">Xóa</a>
+                        <a class="btn btn-danger" href="delete.php?ID= <?php echo $row['ID'] ?>">Xóa</a>
+
                     </td>
                 </tr>
                 <?php } ?>
