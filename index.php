@@ -41,7 +41,7 @@
         </section>
         <section class="col-10 bg-light">
             <h2 class="mt-3">Quản lý hàng hóa</h2>
-            <a class="btn btn-success mb-3" href="addnew.html">Thêm mới</a>
+            <a class="btn btn-success mb-3" href="addnew.php">Thêm mới</a>
             <table class="table table-bordered table-hover bg-white">
                 <tr class="table-active">
                     <td>Mã SP</td>
