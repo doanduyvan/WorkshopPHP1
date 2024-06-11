@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', 'duyvan2001', 'workshopphp1_pet');
+$conn = mysqli_connect('localhost', 'root', 'phamngoctam', 'pet_shop');
     if($conn->connect_error){
         echo "kết nối cơ sở dữ liệu không thành công";  
     }
