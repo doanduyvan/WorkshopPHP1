@@ -1,3 +1,36 @@
+<?php
+require_once 'config/database.php';
+
+$sql = "SELECT * FROM sanpham";
+$result = mysqli_query($conn, $sql);
+$products = [];
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $products[] = $row;
+    }
+}
+$sql = "SELECT * FROM danhmuc";
+$result = mysqli_query($conn, $sql);
+$category = [];
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $category[] = $row;
+    }
+}
+$keycategory = array_column($category, 'TenDM', 'ID');
+
+if(isset($_GET['del'])){
+    $id = $_GET['del'];
+    $sql = "DELETE FROM sanpham WHERE ID = $id";
+    if(mysqli_query($conn, $sql)){
+        header('location: index.php');
+    }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,12 +39,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         article {
             height: 100vh;
+        }
+        .myimg{
+            width: 100px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+        .tdimg{
+           text-align: center;
         }
     </style>
 </head>
@@ -20,8 +60,7 @@
     <article class="row">
         <section class="col-2 bg-secondary pb-4">
             <figure class="figure mt-3 center">
-                <img src="https://www.adobe.com/content/dam/cc/us/en/creativecloud/design/discover/mascot-logo-design/mascot-logo-design_fb-img_1200x800.jpg"
-                    class="figure-img img-fluid rounded" alt="...">
+                <img src="https://www.adobe.com/content/dam/cc/us/en/creativecloud/design/discover/mascot-logo-design/mascot-logo-design_fb-img_1200x800.jpg" class="figure-img img-fluid rounded" alt="...">
                 <figcaption class="figure-caption text-center text-white font-weight-bold">
                     Xin chào, tên của bạn<br>
                     <a class="text-dark" href="">Đăng xuất</a>
@@ -48,98 +87,38 @@
                     <td>Tên SP</td>
                     <td>Đơn giá</td>
                     <td>Hình ảnh</td>
+                    <td>Số lượng</td>
                     <td>Danh mục</td>
                     <td>Hành động</td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Iphone 14</td>
-                    <td>11111111111</td>
-                    <td>Hình ảnh</td>
-                    <td>Apple</td>
-                    <td>
-                        <a class="btn btn-info" href="">Sửa</a>
-                        <a class="btn btn-danger" href="">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Iphone 14</td>
-                    <td>11111111111</td>
-                    <td>Hình ảnh</td>
-                    <td>Apple</td>
-                    <td>
-                        <a class="btn btn-info" href="" >Sửa</a>
-                        <a class="btn btn-danger" href="" 
-                        onclick="confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Iphone 14</td>
-                    <td>11111111111</td>
-                    <td>Hình ảnh</td>
-                    <td>Apple</td>
-                    <td>
-                        <a class="btn btn-info" href="">Sửa</a>
-                        <a class="btn btn-danger" href="">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Iphone 14</td>
-                    <td>11111111111</td>
-                    <td>Hình ảnh</td>
-                    <td>Apple</td>
-                    <td>
-                        <a class="btn btn-info" href="">Sửa</a>
-                        <a class="btn btn-danger" href="">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Iphone 14</td>
-                    <td>11111111111</td>
-                    <td>Hình ảnh</td>
-                    <td>Apple</td>
-                    <td>
-                        <a class="btn btn-info" href="">Sửa</a>
-                        <a class="btn btn-danger" href="">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Iphone 14</td>
-                    <td>11111111111</td>
-                    <td>Hình ảnh</td>
-                    <td>Apple</td>
-                    <td>
-                        <a class="btn btn-info" href="">Sửa</a>
-                        <a class="btn btn-danger" href="">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Iphone 14</td>
-                    <td>11111111111</td>
-                    <td>Hình ảnh</td>
-                    <td>Apple</td>
-                    <td>
-                        <a class="btn btn-info" href="">Sửa</a>
-                        <a class="btn btn-danger" href="">Xóa</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Iphone 14</td>
-                    <td>11111111111</td>
-                    <td>Hình ảnh</td>
-                    <td>Apple</td>
-                    <td>
-                        <a class="btn btn-info" href="">Sửa</a>
-                        <a class="btn btn-danger" href="">Xóa</a>
-                    </td>
-                </tr>
+
+                <?php
+                foreach ($products as $item) {
+                ?>
+                    <tr>
+                        <td><?= $item['ID'] ?></td>
+                        <td><?= $item['TenSP'] ?></td>
+                        <td><?= $item['Gia'] ?></td>
+                        <td class="tdimg">
+                            <img class="myimg" src="img/<?= $item['HinhAnh'] ?>" alt="">
+                        </td>
+                        <td><?= $item['SoLuong'] ?></td>
+                        <td><?= $keycategory[$item['danhmuc_id']] ?></td>
+                        <td>
+                            <a class="btn btn-info" href="editproduct.php?edit=<?= $item['ID'] ?>">Sửa</a>
+                            <a class="btn btn-danger" href="index.php?del=<?= $item['ID'] ?>">Xóa</a>
+                        </td>
+                    </tr>
+
+                <?php
+                }
+                ?>
+
+
+
+
+
+
 
             </table>
             <ul class="pagination pagination-sm text-dark">
@@ -152,7 +131,7 @@
         </section>
     </article>
     <script>
-        
+
     </script>
 </body>
 
