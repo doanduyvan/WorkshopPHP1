@@ -38,7 +38,7 @@ $result = mysqli_query($conn, "SELECT * FROM danhmuc");
                     <a class="list-group-item list-group-item-action list-group-item-dark" href="#">
                         <i class="bi bi-clipboard mr-2" style="font-size: 20px;"></i>Quản lý danh mục
                     </a>
-                    <a class="list-group-item list-group-item-action list-group-item-dark" href="">
+                    <a class="list-group-item list-group-item-action list-group-item-dark" href="../index.php">
                         <i class="bi bi-tag mr-2" style="font-size: 20px;"></i>Quản lý sản phẩm
                     </a>
                 </div>
