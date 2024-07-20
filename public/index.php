@@ -17,6 +17,9 @@ switch($page){
     case "shop":
         require_once "shop.php";
         break;
+    case "product":
+        require_once "product.php";
+        break;
     case "cart":
         require_once "cart.php";
         break;

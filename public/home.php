@@ -354,7 +354,7 @@
 					<div class="favorite favorite_left"></div>
 					<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
 					<div class="product_info">
-					<h6 class="product_name"><a href="#">${item.TenSP}</a></h6>
+					<h6 class="product_name"><a href="public?page=product&id=${item.ID}">${item.TenSP}</a></h6>
 					<div class="product_price">${item.Gia}đ</div>
 					</div>
 					</div>
@@ -384,7 +384,7 @@
 			<div class="favorite favorite_left"></div>
 			<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
 			<div class="product_info">
-			<h6 class="product_name"><a href="#">${item.TenSP}</a></h6>
+			<h6 class="product_name"><a href="public?page=product&id=${item.ID}">${item.TenSP}</a></h6>
 			<div class="product_price">${item.Gia}đ</div>
 			</div>
 			</div>
@@ -433,3 +433,7 @@
 			})
 		}
 	</script>
+
+
+
+
