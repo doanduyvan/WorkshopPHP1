@@ -5,7 +5,17 @@ include_once "../admin/config/Database.php";
 
 switch($method){
     case 'GET':
-
+        if(isset($_GET['soluong'])){
+            $cart = $_SESSION['cart'] ?? false;
+            if($cart){
+                $soluong = count($cart);
+                echo json_encode(['soluong' => $soluong]);
+            }else{
+                echo json_encode(['soluong' => 0]);
+            }
+        }else{
+            echo json_encode(getcart());
+        }
         break;
     case 'POST':
         $checkuser = $_SESSION['user'] ?? null;
@@ -20,11 +30,32 @@ switch($method){
 
         break;
     case 'PUT':
-
+        $data = json_decode(file_get_contents('php://input'),true);
+        updatecart($data);
+        $data = getcart();
+        $res = [
+            'status' => 1,
+            'message' => 'Cập nhật thành công',
+            'data' => $data
+        ];
+        echo json_encode($res);
         break;
     case 'DELETE':
             
         break;
+}
+
+function getcart(){
+
+    if(isset($_SESSION['cart'])){
+        $cart = $_SESSION['cart'];
+        $data = [];
+        foreach($cart as $item){
+            $data[] = $item;
+        }
+        return $data;
+    }
+    return [];
 }
 
 
@@ -46,7 +77,8 @@ function addcart($conn,$data){
                 die;
             }
             $cart[$id] = [
-                'id' => $id,
+                'iduser' => $_SESSION['user']['id'],
+                'idsp' => $id,
                 'soluong' => $soluong,
                 'tensp' => $row['TenSP'],
                 'dongia' => $row['Gia'],
@@ -61,4 +93,27 @@ function addcart($conn,$data){
     }
 }
 
+
+
+function updatecart($data){
+    $cart = $_SESSION['cart'] ?? [];
+    $arridsp = [];
+    foreach($data as $item){
+        $id = $item['id'];
+        $arridsp[] = $id;
+        $soluong = $item['soluong'];
+        if(array_key_exists($id,$cart)){
+            $cart[$id]['soluong'] = $soluong;
+            $cart[$id]['tongtien'] = $soluong * $cart[$id]['dongia'];
+        }
+    }
+    foreach($cart as $id => $item){
+        if(!in_array($id,$arridsp)){
+            unset($cart[$id]);
+        }
+    }
+    $_SESSION['cart'] = $cart;
+}
+
 // echo json_encode(['status' => 1,'message' => 'Thành công']); die;
+

@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Colo Shop</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Colo Shop Template">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<base href="http://localhost/workshop/WorkshopPHP1/">
-<link rel="stylesheet" type="text/css" href="public/libc/styles/bootstrap4/bootstrap.min.css">
-<link href="public/libc/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="public/libc/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="public/libc/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="public/libc/plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="public/libc/styles/main_styles.css">
-<link rel="stylesheet" type="text/css" href="public/libc/styles/responsive.css">
-</head>
 
 
 <body>
@@ -74,6 +57,7 @@
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
+										<li><a href="public?page=order">My Order</a></li>
 										<li><a id="logout" href="#">Log out</a></li>
 									</ul>
 								</li>
@@ -112,7 +96,7 @@
 						<nav class="navbar">
 							<ul class="navbar_menu">
 								<li><a href="public/">home</a></li>
-								<li><a href="#">shop</a></li>
+								<li><a href="public?page=shop">shop</a></li>
 								<li><a href="#">promotion</a></li>
 								<li><a href="#">pages</a></li>
 								<li><a href="#">blog</a></li>
@@ -138,6 +122,19 @@
 		</div>
 
 	</header>
+
+	<script>
+		(()=>{
+			const cart = document.getElementById('checkout_items');
+			if(cart){
+				fetch('api/cart.php?soluong')
+				.then(response => response.json())
+				.then(data => {
+					cart.innerText = data.soluong;
+				});
+			}
+		})();
+	</script>
 
 	<div class="fs_menu_overlay"></div>
 	<div class="hamburger_menu">

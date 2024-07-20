@@ -44,6 +44,9 @@ switch($page){
                 break;
         }
         break;
+    case "order":
+        include_once "./donhang/donhang.php";
+        break;
     case "login":
         include_once "./taikhoan/dangnhap.php";
         break;

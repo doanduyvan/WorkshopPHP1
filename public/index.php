@@ -20,6 +20,12 @@ switch($page){
     case "cart":
         require_once "cart.php";
         break;
+    case "checkout":
+        require_once "checkout.php";
+        break;
+    case "order":
+        require_once "order.php";
+        break;
     default:
         require_once "home.php";
         break;

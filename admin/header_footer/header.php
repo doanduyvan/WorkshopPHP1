@@ -34,6 +34,9 @@
                     <a class="list-group-item list-group-item-action list-group-item-dark" href="?page=sanpham">
                         <i class="bi bi-tag mr-2" style="font-size: 20px;"></i>Quản lý sản phẩm
                     </a>
+                    <a class="list-group-item list-group-item-action list-group-item-dark" href="?page=order">
+                        <i class="bi bi-tag mr-2" style="font-size: 20px;"></i>Quản lý đơn hàng
+                    </a>
                 </div>
             </nav>
         </section>
